@@ -22,7 +22,7 @@ WHERE B.InvoicePaid != 0
 GROUP BY O.OwnerID
 ORDER BY SUM(B.InvoiceAmt) DESC
 
---4)	What dogs were born between 1/1/2013 and 12/31/2014, have an Animal Breed name that ends in “d”?  Include Animal Name, Animal Breed, and Birth Year
+--4)	What dogs were born between 1/1/2013 and 12/31/2014, have an Animal Breed name that ends in â€œdâ€?  Include Animal Name, Animal Breed, and Birth Year
 SELECT A.AnimalName, A.AnimalBreed, YEAR(A.AnimalBirthDate) AS Birthyear
 FROM AnimalODS A
 WHERE A.AnimalBirthDate > '20130101' AND A.AnimalBirthDate < '20141231'
@@ -50,7 +50,7 @@ SELECT O.FirstName, O.LastName, LEN(O.Firstname) AS lenoffirst, LEN(O.LastName) 
 FROM OwnerODS O
 WHERE LEN(O.Firstname) = LEN(O.LastName)
 
---9)	What owes us money for visits with reason code “vaccination”, where the animals are not farm animals (Bison, Cattle, Sheep)?  Create a full name like “lastname, firstname”
+--9)	What owes us money for visits with reason code â€œvaccinationâ€, where the animals are not farm animals (Bison, Cattle, Sheep)?  Create a full name like â€œlastname, firstnameâ€
 SELECT CONCAT(O.LastName, ' ', O.FirstName) AS full_name, O.FirstName, O.LastName, B.InvoicePaid, V.Reason, A.AnimalType
 FROM ((OwnerODS O INNER JOIN AnimalODS A ON O.OwnerID = A.OwnerID) 
 	INNER JOIN VisitODS V ON A.AnimalID = V.AnimalID) INNER JOIN BillingODS B ON V.VisitID = B.VisitID
